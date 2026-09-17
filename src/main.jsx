@@ -1,3 +1,4 @@
 import {createRoot} from "react-dom/client";
+import Application from "./Application";
 
-createRoot(document.getElementById("app")).render(<h1>Hello Application</h1>)
+createRoot(document.getElementById("app")).render(<Application/>)
