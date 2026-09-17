@@ -2,9 +2,9 @@ import { useState } from "react";
 
 export default function Application() {
   const [tasks, setTasks] = useState([
-    { description: "Task 1" },
-    { description: "Task 2" },
-    { description: "Task 1" },
+    { description: "Task 1", completed: true },
+    { description: "Task 2", completed: false },
+    { description: "Task 1", completed: false },
   ]);
   const [description, setDescription] = useState("");
 
@@ -13,12 +13,23 @@ export default function Application() {
     setTasks((old) => [{ description }, ...old]);
   }
 
+  function handleCompletedChanged(task, completed) {
+    setTasks((old) => old.map((o) => (o === task ? { ...o, completed } : o)));
+  }
+
   return (
     <>
       <h1>Task Application</h1>
       <ul>
         {tasks.map((t) => (
-          <li>a task: {t.description}</li>
+          <li>
+            <input
+              type="checkbox"
+              checked={t.completed}
+              onChange={(e) => handleCompletedChanged(t, e.target.checked)}
+            />
+            : {t.description}
+          </li>
         ))}
       </ul>
       <h2>Add a new task</h2>
